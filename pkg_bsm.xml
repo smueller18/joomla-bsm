@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <extension type="package" version="1.6" method="upgrade">
+ <name>Baseball and Softball Manager</name>
+ <author>Stephan Müller</author>
+ <creationDate>September 2017</creationDate>
+ <packagename>bsm</packagename>
+ <version>1.0.0</version>
+ <url>https://github.com/smueller18/joomla-bsm</url>
+ <packager>Stephan Müller</packager>
+ <packagerurl>https://github.com/smueller18/joomla-bsm</packagerurl>
+ <description>Module für die Anzeige von Daten aus dem Baseball und Softball Manager</description>
+ <files folder="packages">
+   <file type="module" id="mod_bsm_table" client="site">mod_bsm_table.zip</file>
+   <file type="module" id="mod_bsm_matchtable" client="site">mod_bsm_matchtable.zip</file>
+ </files>
+ </extension>

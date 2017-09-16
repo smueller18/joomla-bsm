@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1.0" client="site" method="upgrade">
+  <name>Baseball and Softball Manager - MatchTable</name>
+  <author>Stephan Müller</author>
+  <version>1.0.0</version>
+  <copyright>Copyright (C) 2017 Stephan Müller</copyright>
+  <authorUrl>https://github.com/smueller18</authorUrl>
+  <creationDate>September 2017</creationDate>
+  <description>
+    Zeigt die Spiele zu einer bestimmten Liga/Gruppe an. Hierfür wird die Variable „id“ (aus BSM) benötigt, die die anzuzeigende Liga/Gruppe durch den Parameter „league“ festlegt. Diese kann entweder die interne ID bzw. die Abkürzung der Liga/Gruppe aus BSM sein.
+    Wird diese „id“ nicht angegeben, versucht der Shortcode diese aus der aufgerufenen URL auszulesen. Dadurch wird ermöglicht, die Daten der Liga/Gruppe auch dynamisch anzeigen zu lassen. Sollte die „id“ nicht gefunden werden, werden alle Spiele geladen.
+  </description>
+  <files>
+    <filename>mod_bsm_matchtable.xml</filename>
+    <filename module="mod_bsm_matchtable">mod_bsm_matchtable.php</filename>
+    <folder>bsm</folder>
+    <folder>css</folder>
+  </files>
+  <config>
+    <fields name="params">
+      <fieldset name="basic">
+        <field name="apiKey" type="text" label="API Key" description="" size="50" required="true"/>
+
+        <field name="club" type="number" label="Club ID" description="Stellt ein, für welchen Verein die Spiele dargestellt werden sollen – es werden dann nur Spiele angezeigt, in denen dieser Verein Heim oder Gast ist." size="50" required="true" validate="number"/>
+
+        <field name="league" type="number" label="League ID" description="" size="50" validate="number"/>
+
+        <field name="season" type="number" label="Season" description="Bietet die Möglichkeit, dem Shortcode eine abweichende Saison mitzugeben, falls die Saison aus der Grundeinstellung des Plugins nicht gewünscht wird." size="50" validate="number"/>
+
+        <field name="logoMode" type="list" default="none" label="Logo Mode" description="Stellt ein, ob ausschließlich oder neben dem Mannschaftsnamen (bei data-Wert 'team' oder 'acronym') auch das Logo angezeigt werden soll.">
+          <option value="none">None</option>
+          <option value="left">Left</option>
+          <option value="right">Right</option>
+          <option value="only">Only</option>
+        </field>
+
+        <field name="tableData" type="checkboxes" label="Tabllenspalten" description="Stellt ein, welche Daten angezeigt werden sollen. Im Standard wird nur die Spiel-Nr. des Spieles angezeigt.">
+          <option value="date">Date</option>
+          <option value="time">Time</option>
+          <option value="leagueacronym">League Acronym</option>
+          <option value="league">League</option>
+          <option value="id">ID</option>
+          <option value="homeacronym">Home acronym</option>
+          <option value="home">Home</option>
+          <option value="awayacronym">Away acronym</option>
+          <option value="away">Away</option>
+          <option value="fieldname">Fieldname</option>
+          <option value="address">Address</option>
+          <option value="umpireselectionacronym">Umpire Selection Acronym</option>
+          <option value="umpireselection">Umpire Seelction</option>
+          <option value="umpireassignments">Umpire Assignments</option>
+          <option value="scorerselectionacronym">Scorer Selection Acronym</option>
+          <option value="scorerselection">Scorer Selection</option>
+          <option value="scorerassignments">Scorer Assignments</option>
+          <option value="result">Result</option>
+          <option value="scoresheet">Scoresheet</option>
+        </field>
+
+        <field name="dayOfWeek" type="list" default="none" label="Day of Week" description="Stellt ein, ob zum Datum auch noch der Wochentag angezeigt werden soll.">
+          <option value="none">None</option>
+          <option value="short">Short</option>
+          <option value="long">Long</option>
+        </field>
+
+        <field name="gameDays" type="list" default="none" label="Game Days" description="Stellt ein, ob nur eine gefilterte Anzahl an Spielen angezeigt werden soll. Im Standard werden alle Spiele angezeigt.">
+          <option value="any">Any</option>
+          <option value="current">Current</option>
+          <option value="next">Next</option>
+          <option value="previous">Previous</option>
+        </field>
+
+        <field name="hideColumnNames" type="checkbox" label="Hide Column Names" description="Stellt ein, ob nur eine gefilterte Anzahl an Spielen angezeigt werden soll. Im Standard werden alle Spiele angezeigt."/>
+
+        <field name="excludeStates" type="checkboxes" label="Exclude States" description="Bietet die Möglichkeit bestimmte Spielstatus auszublenden, z.B. um nur gespielte Spiele für Ergebnisseiten zu verwenden">
+          <option value="planned">Planned</option>
+          <option value="played">Played</option>
+          <option value="canceled">Canceled</option>
+          <option value="no_show">Spiele mit Nichtantreten</option>
+          <option value="manually_valued">Spiele mit Wertungen gem. BuSpo oder DVO</option>
+        </field>
+
+        <field name="excludeLeagues" type="text" label="Exclude Leagues" description="Stellt ein, welche Ligen/Gruppen NICHT angezeigt werden sollen. Hierzu sind die entsprechenden Ligen/Gruppen (interne ID oder die Abkürzung aus BSM) kommasepariert anzugeben."/>
+
+        <field name="onlyLeagues" type="text" label="Only Leagues" description="Dieser Parameter bietet die Möglichkeit, sich nur bestimmte Ligen/Gruppen anzeigen zu lassen. Hierzu sind die entsprechenden Ligen/Gruppen (interne ID oder die Abkürzung aus BSM) kommasepariert anzugeben."/>
+
+        <field name="groupBy" type="list" default="none" label="Group by" description="Stellt ein, nach welchem Wert die Tabelle gruppiert werden soll. (Hinweis: Bei ligenübergreifender Anzeige eines gesamten Spieltages wird bei der Sortierung der Ligen/Gruppen das Sortierfeld aus BSM verwendet!)">
+          <option value="none">None</option>
+          <option value="league">League</option>
+          <option value="date">Date</option>
+        </field>
+
+        <field name="useFieldIcon" type="checkbox" label="Use Field Icon" description="Bietet die Möglichkeit (z.B. aus Platzgründen) statt der Werte „fieldname“ und/oder „address“ nur ein Icon anzuzeigen. Die Daten werden dann als Mouseover angezeigt. (Hinweis: Wenn das Spielfeld nicht einem der Heimmannschaft(en) angehört oder komplett fehlt, dann wird ein anderes Icon angezeigt, um eine optische Unterscheidung zu ermöglichen!)"/>
+
+      </fieldset>
+    </fields>
+  </config>
+</extension>

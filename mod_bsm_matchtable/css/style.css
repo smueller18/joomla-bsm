@@ -1,0 +1,12 @@
+div[data-object-type="match"] {
+  overflow-x: auto;
+}
+
+td[data-cell-for="home"] img, td[data-cell-for="away"] img, td[data-cell-for="homeacronym"] img, td[data-cell-for="awayacronym"] img {
+  height: 16px;
+  margin-right: 6px;
+}
+
+td[data-cell-for="result"] img {
+  height: 16px;
+}

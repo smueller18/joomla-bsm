@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1.0" client="site" method="upgrade">
+  <name>Baseball and Softball Manager - Table</name>
+  <author>Stephan Müller</author>
+  <version>1.0.0</version>
+  <copyright>Copyright (C) 2017 Stephan Müller</copyright>
+  <authorUrl>https://github.com/smueller18</authorUrl>
+  <creationDate>September 2017</creationDate>
+  <description>
+    Zeigt die Tabelle einer Liga/Gruppe an. Hierfür wird die Variable „id“ (aus BSM) benötigt, die die anzuzeigende Liga/Gruppe durch den Parameter „league“ festlegt. Diese kann entweder die interne ID bzw. die Abkürzung der Liga/Gruppe aus BSM sein.
+    Zusätzlich kann dem Shortcode auch dynamisch der Parameter „bsm_season“ mitgegeben werden, um z.B. ein Jahresarchiv aufzubauen.
+  </description>
+  <files>
+    <filename>mod_bsm_table.xml</filename>
+    <filename module="mod_bsm_table">mod_bsm_table.php</filename>
+    <folder>bsm</folder>
+    <folder>css</folder>
+  </files>
+  <config>
+    <fields name="params">
+      <fieldset name="basic">
+        <field name="apiKey" type="text" label="API Key" description="" size="50" required="true"/>
+
+        <field name="league" type="number" label="League ID" description="" size="50" required="true" validate="number"/>
+
+        <field name="season" type="number" label="Season" description="Bietet die Möglichkeit, dem Shortcode eine abweichende Saison mitzugeben, falls die Saison aus der Grundeinstellung des Plugins nicht gewünscht wird." size="50" required="false" validate="number"/>
+
+        <field name="captionMode" type="list" default="none" label="Caption Mode" description="Stellt ein, ob über der Tabelle auch eine Überschrift angezeigt werden soll und wenn ja welche." required="false">
+          <option value="none">None</option>
+          <option value="localized">Localized</option>
+          <option value="league">League</option>
+        </field>
+
+        <field name="logoMode" type="list" default="none" label="Logo Mode" description="Stellt ein, ob ausschließlich oder neben dem Mannschaftsnamen (bei data-Wert 'team' oder 'acronym') auch das Logo angezeigt werden soll." required="false">
+          <option value="none">None</option>
+          <option value="left">Left</option>
+          <option value="right">Right</option>
+          <option value="only">Only</option>
+        </field>
+
+        <field name="tableData" type="checkboxes" label="Tabllenspalten" description="Stellt ein, welche Daten angezeigt werden sollen. Im Standard wird nur die Tabellenposition angezeigt.">
+          <option value="team">Team</option>
+          <option value="acronym">Acronym</option>
+          <option value="notcompeting">Not competing</option>
+          <option value="matches">Matches</option>
+          <option value="wins">Wins</option>
+          <option value="losses">Losses</option>
+          <option value="quota">Quota</option>
+          <option value="gamesbehind">Games behind</option>
+          <option value="streak">Streak</option>
+        </field>
+      </fieldset>
+    </fields>
+  </config>
+</extension>

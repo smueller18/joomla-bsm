@@ -1,0 +1,8 @@
+div[data-object-type="table"] {
+  overflow-x: auto;
+}
+
+td[data-cell-for="team"] img, td[data-cell-for="acronym"] img {
+  height: 16px;
+  margin-right: 6px;
+}

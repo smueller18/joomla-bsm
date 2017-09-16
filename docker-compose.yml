@@ -1,0 +1,26 @@
+version: '2.1'
+
+services:
+  joomla:
+    image: joomla
+    ports:
+      - "8080:80"
+    volumes:
+      - joomla:/var/www/html
+      - ./mod_bsm_table:/var/www/html/modules/mod_bsm_table
+      - ./mod_bsm_matchtable:/var/www/html/modules/mod_bsm_matchtable
+    environment:
+      JOOMLA_DB_HOST: joomladb
+      JOOMLA_DB_PASSWORD: root
+
+  joomladb:
+    image: mysql:5.6
+    hostname: joomladb
+    volumes:
+      - joomladb:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+volumes:
+  joomladb:
+  joomla:
