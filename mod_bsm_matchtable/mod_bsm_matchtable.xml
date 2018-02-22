@@ -47,7 +47,7 @@
           <option value="fieldname">Fieldname</option>
           <option value="address">Address</option>
           <option value="umpireselectionacronym">Umpire Selection Acronym</option>
-          <option value="umpireselection">Umpire Seelction</option>
+          <option value="umpireselection">Umpire Selection</option>
           <option value="umpireassignments">Umpire Assignments</option>
           <option value="scorerselectionacronym">Scorer Selection Acronym</option>
           <option value="scorerselection">Scorer Selection</option>
